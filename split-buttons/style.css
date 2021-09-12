@@ -1,0 +1,152 @@
+/* stylelint-disable*/
+:root {
+	--theme-button-bg-color: #2060DF;
+	--theme-button-bg-color-hover: #1D56C9;
+	--theme-text-color: #FFF;
+	--theme-button-radius: 6px;
+	--theme-button-font-size: 16px;
+	--theme-button-popup-border-color: #9FB5DF;
+	--theme-modal-bg-color: #FFF;
+	--theme-modal-text-color: #103070;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+html {
+	font-size: var(--theme-button-font-size);
+}
+
+html,
+body {
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+body {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.gui-split-button {
+	background-color: var(--theme-button-bg-color);
+	color: var(--theme-text-color);
+	display: flex;
+	border-radius: var(--theme-button-radius);
+}
+
+.gui-split-button>button {
+	border-top-left-radius: var(--theme-button-radius);
+	border-bottom-left-radius: var(--theme-button-radius);
+}
+
+.gui-button {
+	background-color: transparent;
+	border-style: none;
+	flex: 1 1 100%;
+	font-size: inherit;
+	padding-block: 1.25ch;
+	padding-inline: 2.5ch;
+	column-gap: 1ch;
+	white-space: nowrap;
+	inline-size: 100%;
+	font-weight: 500;
+}
+
+.gui-button-popup {
+	border-bottom-right-radius: var(--theme-button-radius);
+	border-left: 1px solid var(--theme-button-popup-border-color);
+	border-top-right-radius: var(--theme-button-radius);
+	fill: var(--theme-text-color);
+	flex: 1 0 5ch;
+	inline-size: 5ch;
+	position: relative;
+	justify-content: center;
+}
+
+.gui-button-popup svg {
+	box-sizing: content-box;
+	inline-size: 2.5ch;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2px;
+}
+
+.gui-button-item {
+	align-items: center;
+	color: inherit;
+	cursor: pointer;
+	display: inline-flex;
+}
+
+/* Generic Button Item */
+.gui-button-item:where(:hover, :focus-visible) {
+	background-color: var(--theme-button-bg-color-hover);
+	color: var(--theme-text-color);
+}
+
+.gui-button-item:focus-visible {
+	outline-offset: -5px;
+}
+
+/* Button */
+.gui-button:is(:hover, :focus-visible) svg {
+	stroke: var(--theme-modal-bg-color);
+	fill: var(--theme-button-bg-color);
+}
+
+/* Modal */
+.gui-button-popup-modal {
+	position: absolute;
+	bottom: 75%;
+	left: -25%;
+	box-shadow: 0px -1px 2px 0px rgb(0 0 0 / 5%),
+	1px 0px 2px 0px rgb(0 0 0 / 5%),
+	-1px 0px 2px 0px rgb(0 0 0 / 5%),
+	0px 15px 10px -1px rgb(0 0 0 / 20%);
+	border-radius: var(--theme-button-radius);
+	list-style-type: none;
+	padding-block: 10px;
+	padding-inline-start: 0;
+	color: var(--theme-modal-text-color);
+	background-color: var(--theme-modal-bg-color);
+	display: flex;
+	flex-direction: column;
+	font-size: calc(var(--theme-button-font-size) - 0.2ch);
+}
+
+[aria-expanded="false"] .gui-button-popup-modal {
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(5px);
+	transition: opacity 150ms ease-in-out,
+	transform 150ms ease-in-out;
+}
+
+[aria-expanded="true"] .gui-button-popup-modal {
+	opacity: 1;
+	transform: translateY(0px);
+	transition: opacity 300ms ease-in-out,
+	transform 300ms ease-in-out;
+}
+
+[aria-expanded="false"]>svg {
+	transition: transform 150ms ease-in-out;
+	transform: rotate(0deg);
+}
+
+[aria-expanded="true"]>svg {
+	transition: transform 300ms ease-in-out;
+	transform: rotate(180deg);
+}
+
+.gui-button-popup-modal svg {
+	stroke: var(--theme-button-bg-color);
+	fill: var(--theme-modal-bg-color);
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 2px;
+}
